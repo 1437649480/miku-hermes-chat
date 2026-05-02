@@ -1,0 +1,73 @@
+# Miku Hermes Chat - 配置示例
+# 复制此文件为 config.yaml 并填入实际值
+# 注意：此文件不含真实 API Key/Token，仅供模板参考
+
+_config_version: 22
+
+# ========== 主模型 (对话) ==========
+model:
+  api_key: YOUR_DEEPSEEK_API_KEY
+  base_url: http://127.0.0.1:8000/v1
+  default: deepseek-chat
+  provider: custom
+
+# ========== 角色行为 ==========
+agent:
+  api_max_retries: 3
+  image_input_mode: auto
+  max_turns: 90
+  reasoning_effort: none
+
+# ========== 辅助模型群 (均使用 kimi-free-api) ==========
+auxiliary:
+  vision: &kimi_config
+    api_key: YOUR_KIMI_REFRESH_TOKEN
+    base_url: http://127.0.0.1:8002/v1
+    model: kimi-latest
+    provider: custom
+    timeout: 120
+  compression: *kimi_config
+  title_generation: *kimi_config
+  web_extract: *kimi_config
+  approval: *kimi_config
+  mcp: *kimi_config
+  session_search: *kimi_config
+  skills_hub: *kimi_config
+
+# ========== 会话记忆 ==========
+session_reset:
+  default_reset_policy:
+    mode: none         # 永不自动重置
+    notify: false
+
+memory:
+  memory_enabled: true
+  memory_char_limit: 2200
+  user_profile_enabled: true
+
+context:
+  engine: compressor
+
+compression:
+  enabled: true
+  target_ratio: 0.2
+  threshold: 0.5
+  protect_last_n: 20
+
+# ========== 显示设置 ==========
+display:
+  interim_assistant_messages: false
+  busy_input_mode: interrupt
+  streaming: false
+  show_reasoning: false
+
+# ========== 平台接入 ==========
+platforms:
+  weixin:
+    dm_policy: open
+    group_policy: disabled
+
+# ========== 图片生成 ==========
+image_gen:
+  provider: cf          # 使用 cf 插件
+  model: pollinations   # pollinations (免费匿名) 或 flux-schnell (Cloudflare)

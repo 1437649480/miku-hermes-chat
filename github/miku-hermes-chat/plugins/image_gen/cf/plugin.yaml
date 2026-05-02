@@ -1,0 +1,8 @@
+name: cf
+version: 1.0.0
+description: "Free image generation via Cloudflare Workers AI (Flux). Requires CLOUDFLARE_ACCOUNT_ID and CLOUDFLARE_API_TOKEN."
+author: Community
+kind: backend
+requires_env:
+  - CLOUDFLARE_ACCOUNT_ID
+  - CLOUDFLARE_API_TOKEN
