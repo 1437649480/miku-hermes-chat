@@ -139,6 +139,17 @@ miku-hermes-chat/
 
 Apache 2.0 - 详见 [LICENSE](LICENSE)
 
+####免责声明
+逆向API是不稳定的，建议前往MoonshotAI官方 https://platform.moonshot.cn/ 付费使用API，避免封禁的风险。
+
+本组织和个人不接受任何资金捐助和交易，此项目是纯粹研究交流学习性质！
+
+仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！
+
+仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！
+
+仅限自用，禁止对外提供服务或商用，避免对官方造成服务压力，否则风险自担！
+
 ## 🙏 致谢
 
 - [Nous Research](https://github.com/NousResearch) - Hermes Agent 框架
