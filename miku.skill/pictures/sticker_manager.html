@@ -292,7 +292,7 @@ body::before {
 
 /* ---- Background Switch Button (Bottom Right) ---- */
 #bg-switch {
-  position:fixed; bottom:20px; right:20px; z-index:50;
+  position:fixed; bottom:20px; right:76px; z-index:50;
   width:48px; height:48px;
   border-radius:50%;
   border:2px solid var(--accent);
@@ -311,6 +311,50 @@ body::before {
 #bg-switch svg {
   width:24px; height:24px;
   fill:currentColor;
+}
+
+/* ---- Hide UI Button (Bottom Right, next to bg-switch) ---- */
+#hide-ui-btn {
+  position:fixed; bottom:20px; right:20px; z-index:50;
+  width:48px; height:48px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  background: rgba(0,20,40,0.6);
+  color: var(--accent);
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition: all 0.3s;
+}
+#hide-ui-btn:hover {
+  background: var(--accent);
+  color: #000;
+}
+#hide-ui-btn svg {
+  width:28px; height:28px;
+}
+#hide-ui-btn.active {
+  background: var(--accent);
+  color: #000;
+}
+#hide-ui-btn.active svg circle {
+  fill: var(--accent);
+}
+
+/* ---- Hidden State ---- */
+body.ui-hidden #sidebar,
+body.ui-hidden #main,
+body.ui-hidden #bg-timer {
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.5s;
+}
+body.ui-hidden #hide-ui-btn {
+  opacity: 1;
+  pointer-events: auto;
+}
+body.ui-hidden #bg-switch {
+  opacity: 1;
+  pointer-events: auto;
 }
 
 /* ---- Responsive ---- */
@@ -430,6 +474,9 @@ body::before {
 <button id="bg-switch" onclick="nextBg()" title="切换背景">
   <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
 </button>
+<button id="hide-ui-btn" onclick="toggleUI()" title="隐藏/显示界面">
+  <svg id="hide-ui-icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="none" stroke="currentColor" stroke-width="2"/></svg>
+</button>
 
 <script>
 // ============================================================
@@ -517,6 +564,19 @@ function nextBg() {
 let lastBgSwitch = Date.now();
 const origSetBg = setBg;
 setBg = function(i) { lastBgSwitch = Date.now(); origSetBg(i); };
+
+// ============================================================
+// Toggle UI
+// ============================================================
+let uiHidden = false;
+function toggleUI() {
+  uiHidden = !uiHidden;
+  document.body.classList.toggle('ui-hidden', uiHidden);
+  const btn = document.getElementById('hide-ui-btn');
+  const icon = document.getElementById('hide-ui-icon');
+  btn.classList.toggle('active', uiHidden);
+  btn.title = uiHidden ? '显示界面' : '隐藏界面';
+}
 
 // ============================================================
 // Sidebar
