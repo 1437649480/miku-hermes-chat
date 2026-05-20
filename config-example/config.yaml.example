@@ -97,3 +97,11 @@ tts:
   # kittentts:                        # 轻量本地模型 - 可 fine-tune Miku 声线
   #   model: KittenML/kitten-tts-nano-0.8-int8
   #   voice: Jasper
+
+# ========== 语音模式 (默认开启 TTS) ==========
+voice:
+  auto_tts: true                     # 自动语音合成
+  default_mode: all                  # 默认模式: all=所有回复带语音 (/voice tts)
+  beep_enabled: true                 # 录音提示音
+  max_recording_seconds: 120         # 最大录音时长
+  record_key: ctrl+b                 # 录音快捷键

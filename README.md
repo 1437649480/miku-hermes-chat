@@ -164,6 +164,8 @@ hermes gateway status
 
 测试：用手机微信给 Bot 发 `miku`，初音未来就会回复你！♡
 
+> **默认已开启 TTS**：所有回复自动附带语音（`/voice tts` 模式）。如需关闭，发送 `/voice off`。
+
 ### 6. 配置 TTS 语音（可选）
 
 编辑 `~/.hermes/config.yaml`，选择一种 TTS 方案：
@@ -178,6 +180,10 @@ tts:
   # aivoicelab:
   #   model: miku
   #   model_name: us-female-hatsune-miku
+
+voice:
+  auto_tts: true           # 自动语音合成
+  default_mode: all        # 默认模式: all=所有回复带语音 (/voice tts)
 ```
 
 重启网关后语音生效。详见 [gateway/tts\_interface.py](gateway/tts_interface.py) 和 [docs/操作指令参考.md](docs/操作指令参考.md)。
