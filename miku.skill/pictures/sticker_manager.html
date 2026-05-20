@@ -289,6 +289,22 @@ body::before {
   position:fixed; bottom:16px; left:16px; z-index:50;
   font-size:0.75rem; color: rgba(255,255,255,0.35);
   background: rgba(0,0,0,0.5); padding:4px 10px; border-radius: 10px;
+  display:flex; align-items:center; gap:8px;
+}
+
+#bg-btn {
+  background: rgba(0,212,212,0.3);
+  border: 1px solid var(--accent);
+  color: var(--accent);
+  padding: 2px 8px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 0.7rem;
+  transition: all 0.2s;
+}
+#bg-btn:hover {
+  background: var(--accent);
+  color: #000;
 }
 
 /* ---- Responsive ---- */
@@ -404,7 +420,7 @@ body::before {
 </div>
 
 <div id="toast"></div>
-<div id="bg-timer"></div>
+<div id="bg-timer"><span id="bg-timer-text"></span><button id="bg-btn" onclick="nextBg()">切换背景</button></div>
 
 <script>
 // ============================================================
@@ -477,8 +493,15 @@ function updateTimer() {
   const remain = BG_CYCLE_SEC - (elapsed % BG_CYCLE_SEC);
   const m = Math.floor(remain / 60);
   const s = remain % 60;
-  document.getElementById('bg-timer').textContent =
-    `壁纸切换: ${m}:${String(s).padStart(2,'0')}  (${backgrounds.length}张)`;
+  document.getElementById('bg-timer-text').textContent =
+    `壁纸: ${bgIndex + 1}/${backgrounds.length} | 自动切换: ${m}:${String(s).padStart(2,'0')}`;
+}
+
+function nextBg() {
+  if (backgrounds.length === 0) return;
+  bgIndex = (bgIndex + 1) % backgrounds.length;
+  setBg(bgIndex);
+  lastBgSwitch = Date.now();
 }
 let lastBgSwitch = Date.now();
 const origSetBg = setBg;
