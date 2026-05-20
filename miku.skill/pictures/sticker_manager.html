@@ -456,9 +456,11 @@ async function init() {
 // ============================================================
 function startBackgroundCycle() {
   if (backgrounds.length === 0) {
-    document.getElementById('bg-timer').textContent = '无壁纸';
+    document.getElementById('bg-timer-text').textContent = '无壁纸 (请将图片放入 background/ 目录)';
+    document.getElementById('bg-btn').style.display = 'none';
     return;
   }
+  document.getElementById('bg-btn').style.display = 'inline-block';
   setBg(0);
   bgInterval = setInterval(() => {
     bgIndex = (bgIndex + 1) % backgrounds.length;
