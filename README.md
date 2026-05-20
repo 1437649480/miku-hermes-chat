@@ -9,18 +9,18 @@
 
 ## ✨ 核心特性
 
-| 功能            | 状态     | 说明                                  |
-| ------------- | ------ | ----------------------------------- |
-| 💬 角色扮演聊天     | ✅ 完成   | 基于 miku.skill 的初音未来女友人格             |
-| 🖼️ 图片识别      | ✅ 完成   | 发送图片自动描述，支持多模态理解                    |
-| 🧠 长期记忆       | ✅ 完成   | 会话永不自动重置，跨天记忆                       |
-| 📦 上下文压缩      | ✅ 完成   | 自动压缩超长对话历史                          |
-| 📝 标题自动生成     | ✅ 完成   | 会话自动命名                              |
-| 🌐 网页内容提取     | ✅ 完成   | URL 发送即解析                           |
-| 🎨 表情包注入     | ✅ 完成   | 情感检测 + 关键词匹配，自动插入初音表情包           |
-|  Token 自动刷新 | ✅ 完成   | Windows 任务计划程序定时刷新                  |
-| ⚡ 24×7 保活     | ✅ 完成   | 关屏不关机，持续在线                          |
-| 🎤 TTS 语音合成     | 🔌 可选   | Edge TTS 免费 / 网站反代 / RVC 本地 / AI 模型 |
+| 功能          | 状态    | 说明                                  |
+| ----------- | ----- | ----------------------------------- |
+| 💬 角色扮演聊天   | ✅ 完成  | 基于 miku.skill 的初音未来女友人格             |
+| 🖼️ 图片识别    | ✅ 完成  | 发送图片自动描述，支持多模态理解                    |
+| 🧠 长期记忆     | ✅ 完成  | 会话永不自动重置，跨天记忆                       |
+| 📦 上下文压缩    | ✅ 完成  | 自动压缩超长对话历史                          |
+| 📝 标题自动生成   | ✅ 完成  | 会话自动命名                              |
+| 🌐 网页内容提取   | ✅ 完成  | URL 发送即解析                           |
+| 🎨 表情包注入    | ✅ 完成  | 情感检测 + 关键词匹配，自动插入初音表情包              |
+| Token 自动刷新  | ✅ 完成  | Windows 任务计划程序定时刷新                  |
+| ⚡ 24×7 保活   | ✅ 完成  | 关屏不关机，持续在线                          |
+| 🎤 TTS 语音合成 | 🔌 可选 | Edge TTS 免费 / 网站反代 / RVC 本地 / AI 模型 |
 
 ## 🏗️ 架构概览
 
@@ -46,7 +46,7 @@ graph TB
     Gateway --> Kimi
 ```
 
----
+***
 
 ## 🚀 快速开始
 
@@ -101,7 +101,8 @@ hermes skills enable miku
 ```
 
 > 📚 **完整配置参考：** 更多详细配置（语音模式、TTS、辅助功能等）见：
-> - [docs/PROJECT_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) — 完整配置结构
+>
+> - [docs/PROJECT\_OVERVIEW.md](docs/PROJECT_OVERVIEW.md) — 完整配置结构
 > - [docs/部署指南.md](docs/部署指南.md) — 手把手部署教程
 > - [docs/操作指令参考.md](docs/操作指令参考.md) — 聊天指令大全
 
@@ -118,7 +119,28 @@ cp gateway/sticker_cache.py $HERMES_HOME/gateway/sticker_cache.py
 # 重启网关后，miku 会自动根据情绪发送匹配的表情包
 ```
 
-> `sticker_injector.py` 支持 6 种情绪检测（开心/难过/害羞/生气/惊讶/日常）+ 关键词匹配 + 时段感知，从 209 张初音表情包中自动选择最合适的。
+> `sticker_injector.py` 读取 `miku.skill/pictures/sticker_catalog.json`（表情包目录），支持 6 种情绪检测（开心/撒娇/安慰/傲娇/难过/惊讶/日常）+ 关键词匹配 + 时段感知，从 209 张初音表情包中自动选择最合适的。
+
+#### 🖼️ 可视化表情包管理系统
+
+提供 Web 可视化界面管理表情包，支持**上传、删除、分类**操作：
+
+```bash
+cd miku.skill/pictures
+pip install flask
+python sticker_manager.py
+# 浏览器打开 http://localhost:5100
+```
+
+| 功能 | 操作 |
+|------|------|
+| 查看 | 按分类浏览所有表情包，搜索过滤 |
+| 上传 | 拖放/点击上传 PNG/JPG/WebP，自动归档到对应来源目录 |
+| 删除 | 悬停卡片点击 X 按钮，同时从 catalog 和磁盘删除 |
+| 分类 | 新建/编辑/删除情绪分类，配置触发词和场景 |
+| 壁纸 | 每 5 分钟自动循环 background/ 目录中的壁纸（右键编辑分类） |
+
+> 💡 **添加/修改壁纸**：将 .jpg/.png 图片放入 `miku.skill/pictures/background/` 目录即可，系统自动识别并在 5 分钟循环中切换。推荐从 [分享鲨壁纸网 - 初音未来](https://www.fenxiangsha.com/search/255-0.html) 下载高清壁纸。
 
 ### 5. 启动 Hermes → 连接微信
 
@@ -155,7 +177,7 @@ tts:
   #   model_name: us-female-hatsune-miku
 ```
 
-重启网关后语音生效。详见 [gateway/tts_interface.py](gateway/tts_interface.py) 和 [docs/操作指令参考.md](docs/操作指令参考.md)。
+重启网关后语音生效。详见 [gateway/tts\_interface.py](gateway/tts_interface.py) 和 [docs/操作指令参考.md](docs/操作指令参考.md)。
 
 ### 7. 配置辅助功能
 
@@ -174,7 +196,7 @@ auxiliary:
     timeout: 360                  # 网页提取耗时较长，给足够超时
 ```
 
-> **标题自动生成**：新会话的第一轮对话后，自动用 Kimi 摘要生成中文标题。  
+> **标题自动生成**：新会话的第一轮对话后，自动用 Kimi 摘要生成中文标题。\
 > **网页内容提取**：在微信中发送 URL（如 B站视频、知乎文章），miku 会自动抓取内容并分析。
 
 ## 📁 项目结构
@@ -186,6 +208,9 @@ miku-hermes-chat/
 ├── miku.skill/                     # 初音未来角色定义
 │   ├── SKILL.md                    #    人格、对话规则、示例
 │   └── pictures/                   #    表情包图片 + sticker_catalog.json
+│       ├── sticker_catalog.json    #    表情包目录（6种情绪×209张贴纸，触发词+场景匹配）
+│       ├── 01_miratsu/             #    みらつ Q版可爱风 (13张)
+│       └── 06_bilibili_200/        #    B站官方V家表情包 (196张，7个主题)
 ├── gateway/                        # Hermes 网关扩展
 │   ├── sticker_injector.py         #    情感表情包注入引擎
 │   ├── sticker_cache.py            #    表情包描述缓存
@@ -213,9 +238,9 @@ miku-hermes-chat/
 
 本项目完全基于**免费 API 反代**技术，实现零 API 费用：
 
-| 服务                | 上游           | 端口   | 说明                |
-| ----------------- | ------------ | ---- | ----------------- |
-| deepseek-free-api | DeepSeek 网页版 | 8000 | 主对话，OpenAI 兼容 |
+| 服务                | 上游           | 端口   | 说明                  |
+| ----------------- | ------------ | ---- | ------------------- |
+| deepseek-free-api | DeepSeek 网页版 | 8000 | 主对话，OpenAI 兼容       |
 | kimi-free-api     | Kimi 网页版     | 8002 | 辅助模型群（Vision/压缩/提取） |
 
 详细部署指南见 [docs/free-api-guide.md](docs/free-api-guide.md)。
@@ -224,13 +249,13 @@ miku-hermes-chat/
 
 在聊天中发送以下指令控制 TTS 语音行为：
 
-| 指令 | 效果 |
-|------|------|
-| `/voice tts` | 所有回复都带语音（默认） |
-| `/voice on` | 仅回复语音消息时发语音 |
-| `/voice off` | 纯文字，不发语音 |
-| `/voice status` | 查看当前语音模式 |
-| `/voiceorder after` | 语音在文字+表情包之后发 |
+| 指令                   | 效果           |
+| -------------------- | ------------ |
+| `/voice tts`         | 所有回复都带语音（默认） |
+| `/voice on`          | 仅回复语音消息时发语音  |
+| `/voice off`         | 纯文字，不发语音     |
+| `/voice status`      | 查看当前语音模式     |
+| `/voiceorder after`  | 语音在文字+表情包之后发 |
 | `/voiceorder before` | 语音在文字+表情包之前发 |
 
 语音支持三种模式：**全量 TTS** → 所有回复带语音 / **语音回复** → 仅在收到语音时回复语音 / **关闭** → 纯文字静音。详细文档见 [docs/操作指令参考.md](docs/操作指令参考.md)。
@@ -250,20 +275,21 @@ miku-hermes-chat/
 
 本项目使用的**初音未来 (Hatsune Miku)** 虚拟角色受以下协议保护：
 
-| 协议 | 适用对象 | 许可范围 |
-|------|----------|----------|
+| 协议                                                                      | 适用对象             | 许可范围            |
+| ----------------------------------------------------------------------- | ---------------- | --------------- |
 | [PCL](https://piapro.jp/license/pcl/summary) (Piapro Character License) | 初音未来等 Crypton 角色 | 非营利二次创作、公开展示、分发 |
-| [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/) | 角色原始插画 | 复制、改编、分发（非商业用途） |
+| [CC BY-NC 3.0](https://creativecommons.org/licenses/by-nc/3.0/)         | 角色原始插画           | 复制、改编、分发（非商业用途） |
 
 **使用要求：**
+
 - **非商业** — 禁止营利目的、禁止广告宣传、禁止收费
 - **署名** — 必须标注 `Hatsune Miku, © Crypton Future Media, Inc. 2007`
 - **CC 链接** — 在线发布时添加 `licensed under a CC BY-NC: https://creativecommons.org/licenses/by-nc/3.0/`
-- **商业用途** — 需联系 intlbiz@crypton.co.jp 获取单独授权
+- **商业用途** — 需联系 <intlbiz@crypton.co.jp> 获取单独授权
 
 **本项目遵守：** 本项目为个人非营利研究交流，角色 Skill 基于官方设定与同人文化创作，所有角色版权归 [Crypton Future Media, Inc.](https://www.crypton.co.jp/) 所有。
 
-详细使用条款: https://piapro.jp/license/character_guideline
+详细使用条款: <https://piapro.jp/license/character_guideline>
 
 ## 📄 License
 
@@ -288,5 +314,4 @@ Apache 2.0 - 详见 [LICENSE](LICENSE)
 - [lzA6](https://github.com/lzA6) - arting-2api 参考
 - [Crypton Future Media](https://www.crypton.co.jp/) - 初音未来角色版权方
 - [KEI](https://x.com/kei_garou) - 初音未来角色原画设计
-- [藤田咲](https://x.com/fujitasaki_pu) - 初音未来音源提供 
 

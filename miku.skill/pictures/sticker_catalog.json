@@ -1,0 +1,209 @@
+{
+  "pictures_base": "/home/yaya/.hermes/skills/miku/pictures",
+  "MEDIA_format": "MEDIA:{pictures_base}/{sticker_path}",
+  "sources": {
+    "bilibili_200": {
+      "description": "Bilibili 官方V家表情包",
+      "path": "06_bilibili_200/miku_only"
+    },
+    "miratsu": {
+      "description": "みらつ Q版可爱风表情包",
+      "path": "01_miratsu"
+    }
+  },
+  "categories": {
+    "开心": {
+      "情绪": "喜悦、兴奋、庆祝、被夸、好消息",
+      "触发词": ["哈哈", "好棒", "太好了", "耶", "厉害", "恭喜", "好消息", "nice", "棒", "赞", "哇", "开心", "高兴", "快乐", "成功", "赢了"],
+      "触发场景": ["好消息", "达成目标", "收到礼物", "对方说喜欢", "有趣的事", "庆祝", "被夸"],
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_nice.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_哈哈哈哈.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_打call.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_赞.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_好耶.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_走花路.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_开心撒花.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_棒棒哒.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_大吉大利.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_三连快乐.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_干杯.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_太棒了.png",
+        "01_miratsu/cv5897018_真棒.png"
+      ]
+    },
+    "撒娇": {
+      "情绪": "依赖、亲昵、求关注、想念",
+      "触发词": ["想你", "陪我", "人家", "抱抱", "贴贴", "亲亲", "喜欢你", "不理我", "哼", "嘛", "嘛~"],
+      "触发场景": ["对方冷落了", "想要陪伴", "表达想念", "日常互动", "求关注"],
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_抱抱.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_贴贴.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_拜托拜托.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_摸摸.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_啾咪.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_爱你.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_表白.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_期待.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_热情.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_发射爱心.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_看看我.png",
+        "01_miratsu/miratsu_喜欢你.png"
+      ]
+    },
+    "安慰": {
+      "情绪": "关心、温暖、鼓励、心疼",
+      "触发词": ["加油", "别难过", "陪你", "辛苦了", "没关系", "会好的", "抱抱", "心疼", "累了", "休息"],
+      "触发场景": ["对方难过", "对方累了", "对方遇到困难", "对方失败", "对方压力大"],
+      "stickers": [
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_相信你.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_打气.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_摸头.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_加油.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_暖暖的.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_赠你玫瑰.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_发礼物.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_未来有你.png"
+      ]
+    },
+    "傲娇": {
+      "情绪": "小脾气、假装生气、吃醋、嫌弃",
+      "触发词": ["切", "才没有", "谁要", "哼", "嫌弃", "无语", "啊这", "酸了", "才不是", "笨蛋", "讨厌"],
+      "触发场景": ["对方提到别人", "被忽略", "对方做了蠢事", "小争执", "吃醋"],
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_嫌弃.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_无语.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_鬼脸.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_啊这.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_好家伙_哦吼.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_酸了.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_生闷气.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_我酸了.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_真的吗.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_啊？？.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_让我看看.png",
+        "01_miratsu/miku不是坏孩子.png",
+        "01_miratsu/miratsu_啊这.jpg"
+      ]
+    },
+    "难过": {
+      "情绪": "委屈、伤心、心疼、叹气",
+      "触发词": ["呜呜", "哭了", "委屈", "心疼", "难过", "伤心", "叹气", "不开心", "烦", "郁闷", "寂寞"],
+      "触发场景": ["被批评", "对方不开心传染了", "想起伤心事", "离别", "孤独"],
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_哭了.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_委屈.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_自闭.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_叹气.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_泪目.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_委屈.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_Nooo.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_委屈.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_哎.png"
+      ]
+    },
+    "惊讶": {
+      "情绪": "吃惊、困惑、意想不到、震惊",
+      "触发词": ["诶", "啊", "什么", "真的吗", "不会吧", "居然", "OMG", "天哪", "哇", "吓", "没想到"],
+      "触发场景": ["听到意外消息", "对方说了奇怪的话", "突然事件", "意想不到"],
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_吃惊.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_问号.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_忽然出现.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_真的么.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_SOS.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_头晕晕.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_困惑.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_OMG.png"
+      ]
+    },
+    "日常": {
+      "情绪": "问候、告别、日常状态、闲聊",
+      "触发词": ["早安", "晚安", "再见", "吃饭", "睡觉", "工作", "学习", "天气", "在吗", "干嘛"],
+      "触发场景": ["早安晚安", "说了再见", "困了饿了", "日常闲聊", "问候", "节日"],
+      "时间偏好": {
+        "早上": ["雪未来_早安.png", "初音未来_困了.png"],
+        "中午": ["樱花未来_干饭.png", "初音未来_端碗.png"],
+        "下午": ["雪未来_喝奶茶.png", "樱花未来_赏樱.png"],
+        "晚上": ["初音未来_睡了.png", "雪未来_赖床.png", "初音未来圣诞快乐_打盹.png"],
+        "深夜": ["初音未来_困了.png", "樱花未来_困困_乏了.png", "初音未来圣诞快乐_打盹.png"]
+      },
+      "stickers": [
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_再见.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_困了.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_睡了.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_喜欢.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_GKD.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_端碗.png",
+        "06_bilibili_200/miku_only/115-初音未来13周年/初音未来_害怕.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_早安.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_赖床.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_喝奶茶.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_下雪了.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_等一等.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_嘿嘿.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_唱歌.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_击掌.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_堆雪人.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_给你惊喜.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_挠头.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_忍住不笑.png",
+        "06_bilibili_200/miku_only/162-雪未来/雪未来_冲呀.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_困困_乏了.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_干饭.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_赏樱.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_发芽.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_害.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_投降.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_樱花送你.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_羞羞.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_酷.png",
+        "06_bilibili_200/miku_only/1330-樱花未来/樱花未来_生气.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_登场.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_走了.png",
+        "06_bilibili_200/miku_only/329-未来有你5周年/未来有你_5周年.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_必须拿下.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_我全都要.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_爆.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_终于等到你.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_羡慕哭了.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_新年快乐.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_红包拿来.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_心碎.png",
+        "06_bilibili_200/miku_only/4525-初音未来三连快乐表情包/初音未来三连快乐表情包_过年啦.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_嘿嘿.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_喝茶.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_偷看.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_嘘.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_思索.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_打盹.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_扭捏.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_擦汗.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_歇了.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_该工作了.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_记下来.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_看看我.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_叮叮咚咚.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_圣诞快乐.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_圣诞驯鹿.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_遗忘喷雾.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_求求.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_填坑.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_掉坑.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_好冷.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_火了.png",
+        "06_bilibili_200/miku_only/714-初音未来圣诞快乐/初音未来圣诞快乐_爱了.png",
+        "01_miratsu/晚安.jpg",
+        "01_miratsu/我来了或者偷看.png",
+        "01_miratsu/吧唧吧唧吃东西.png",
+        "01_miratsu/miratsu_srch_39818878_19.png",
+        "01_miratsu/miratsu_srch_40656257_12.jpg",
+        "01_miratsu/miratsu_srch_8875832_9.png",
+        "01_miratsu/miratsu_srch_17646450_7.jpg",
+        "01_miratsu/miratsu_srch_17818018_3.jpg",
+        "01_miratsu/cv39684582_img_04.jpg",
+        "01_miratsu/miratsu_artcover_39651809_2.jpg"
+      ]
+    }
+  }
+}

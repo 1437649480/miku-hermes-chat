@@ -1,11 +1,11 @@
 @echo off
-chcp 65001 >nul
+chcp 65001 >nul 2>&1
 echo ==========================================
-echo   Hermes 睡眠保活模式
-echo   屏幕会关闭，但服务持续运行
+echo   Hermes - Keep Awake Mode
+echo   Screen will sleep, services stay alive
 echo ==========================================
 echo.
-echo 按 Ctrl+C 可退出保活模式，恢复系统正常睡眠
+echo Press Ctrl+C to exit keep-awake mode
 echo.
 python "%~dp0keep-awake.py"
 pause

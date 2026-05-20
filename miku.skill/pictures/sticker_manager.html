@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>初音未来 表情包管理系统 - Miku Sticker Manager</title>
+<style>
+* { margin:0; padding:0; box-sizing:border-box; }
+
+:root {
+  --glass: rgba(0,20,40,0.72);
+  --glass-hover: rgba(0,30,60,0.82);
+  --glass-light: rgba(200,230,255,0.12);
+  --accent: #00d4d4;
+  --accent2: #ff66aa;
+  --danger: #ff4466;
+  --text: #e0f0ff;
+  --text-dim: #88aacc;
+  --radius: 14px;
+}
+
+body {
+  font-family: "Microsoft YaHei", "PingFang SC", system-ui, sans-serif;
+  color: var(--text);
+  min-height: 100vh;
+  overflow-x: hidden;
+  background: #0a1628;
+  transition: background-image 1.2s ease-in-out;
+}
+
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: -1;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.65) saturate(1.1);
+  transition: background-image 1.2s ease-in-out;
+}
+
+#app { display:flex; min-height:100vh; }
+
+/* ---- Sidebar ---- */
+#sidebar {
+  width: 260px; min-width: 260px;
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-right: 1px solid rgba(255,255,255,0.08);
+  padding: 20px 16px;
+  display:flex; flex-direction:column;
+  gap: 12px;
+  z-index: 10;
+}
+
+#sidebar h2 {
+  font-size: 1.1rem;
+  background: linear-gradient(135deg, var(--accent), var(--accent2));
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  text-align: center;
+  padding: 8px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+  margin-bottom: 4px;
+}
+
+.cat-item {
+  padding: 12px 16px;
+  border-radius: var(--radius);
+  cursor: pointer;
+  transition: all 0.2s;
+  display:flex; justify-content:space-between; align-items:center;
+  background: var(--glass-light);
+  font-size: 0.95rem;
+}
+.cat-item:hover, .cat-item.active {
+  background: rgba(0, 212, 212, 0.18);
+  border: 1px solid var(--accent);
+}
+.cat-count { font-size:0.8rem; color:var(--text-dim); }
+
+.sidebar-actions {
+  margin-top: auto;
+  display:flex; flex-direction:column; gap:8px;
+}
+.btn {
+  padding: 10px 18px; border-radius: 10px; border: none;
+  cursor: pointer; font-size: 0.9rem; font-weight: 600;
+  transition: all 0.2s; color: #fff; letter-spacing: 0.5px;
+}
+.btn-accent { background: linear-gradient(135deg, #0099aa, #00ccbb); }
+.btn-accent:hover { filter: brightness(1.2); }
+.btn-pink { background: linear-gradient(135deg, #cc4488, #ff66aa); }
+.btn-pink:hover { filter: brightness(1.2); }
+.btn-danger { background: rgba(255,68,102,0.5); border: 1px solid var(--danger); }
+.btn-danger:hover { background: var(--danger); }
+
+/* ---- Main ---- */
+#main {
+  flex:1; padding: 24px 32px;
+  overflow-y:auto; display:flex; flex-direction:column; gap:18px;
+}
+
+#header {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius);
+  padding: 18px 24px;
+  display:flex; justify-content:space-between; align-items:center;
+  flex-wrap:wrap; gap:12px;
+}
+#header h1 { font-size:1.4rem; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+
+.header-actions { display:flex; gap:10px; align-items:center; }
+#search { padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.3); color:var(--text); font-size:0.9rem; width:200px; outline:none; }
+#search::placeholder { color:var(--text-dim); }
+#search:focus { border-color: var(--accent); }
+
+.total-badge {
+  background: var(--glass-light);
+  padding: 6px 14px; border-radius: 20px;
+  font-size:0.85rem; color: var(--text-dim);
+}
+
+/* ---- Info Panel ---- */
+#info-panel {
+  background: var(--glass);
+  backdrop-filter: blur(24px);
+  -webkit-backdrop-filter: blur(24px);
+  border-radius: var(--radius);
+  padding: 16px 24px;
+  font-size:0.9rem;
+  display:flex; gap:20px; flex-wrap:wrap;
+  align-items:center;
+}
+#info-panel strong { color: var(--accent); }
+#info-panel .tag {
+  background: rgba(0,212,212,0.15);
+  padding: 3px 10px; border-radius: 12px;
+  font-size:0.8rem;
+}
+
+.trigger-words {
+  display:flex; flex-wrap:wrap; gap:6px; margin-top:6px;
+}
+.trigger-word {
+  background: rgba(255,102,170,0.15);
+  padding:3px 10px; border-radius: 12px;
+  font-size:0.8rem; color: #ff99bb;
+}
+
+/* ---- Grid ---- */
+#grid {
+  display:grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap:14px;
+}
+
+.sticker-card {
+  background: var(--glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  cursor: pointer;
+  transition: all 0.25s;
+  border: 1px solid rgba(255,255,255,0.06);
+}
+.sticker-card:hover {
+  transform: translateY(-4px);
+  border-color: var(--accent);
+  box-shadow: 0 8px 30px rgba(0, 200, 200, 0.15);
+}
+
+.sticker-img-wrap {
+  width:100%; height:140px;
+  display:flex; align-items:center; justify-content:center;
+  background: rgba(0,0,0,0.2);
+  overflow:hidden;
+}
+.sticker-img-wrap img {
+  max-width:100%; max-height:100%;
+  object-fit: contain;
+  transition: transform 0.3s;
+}
+.sticker-card:hover .sticker-img-wrap img { transform: scale(1.08); }
+
+.sticker-name {
+  padding: 8px 10px; font-size:0.75rem;
+  color: var(--text-dim); text-align:center;
+  white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
+  background: rgba(0,0,0,0.2);
+}
+
+.sticker-delete {
+  position: absolute; top:6px; right:6px;
+  width: 26px; height: 26px;
+  border-radius: 50%; border: none;
+  background: rgba(255,0,40,0.6);
+  color: #fff; font-size: 14px;
+  cursor: pointer; opacity: 0;
+  transition: opacity 0.2s;
+  display:flex; align-items:center; justify-content:center;
+  z-index: 2;
+}
+.sticker-card:hover .sticker-delete { opacity: 1; }
+.sticker-delete:hover { background: #ff2244; }
+
+.empty-state {
+  grid-column: 1 / -1;
+  text-align:center; padding:60px 20px;
+  color: var(--text-dim); font-size:1.1rem;
+}
+
+/* ---- Modal ---- */
+.modal-overlay {
+  position:fixed; inset:0; z-index:100;
+  background: rgba(0,0,0,0.5);
+  backdrop-filter: blur(6px);
+  display:none; align-items:center; justify-content:center;
+}
+.modal-overlay.show { display:flex; }
+
+.modal {
+  background: var(--glass);
+  backdrop-filter: blur(30px);
+  -webkit-backdrop-filter: blur(30px);
+  border-radius: 20px;
+  padding: 32px; max-width: 520px; width: 90%;
+  border: 1px solid rgba(255,255,255,0.1);
+  max-height: 80vh; overflow-y:auto;
+}
+.modal h3 {
+  font-size:1.2rem; margin-bottom:18px;
+  background: linear-gradient(135deg,var(--accent),var(--accent2));
+  -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+.form-group { margin-bottom:14px; }
+.form-group label {
+  display:block; margin-bottom:5px;
+  font-size:0.85rem; color: var(--text-dim);
+}
+.form-group input, .form-group select, .form-group textarea {
+  width:100%; padding:10px 14px;
+  border-radius: 10px; border:1px solid rgba(255,255,255,0.12);
+  background: rgba(0,0,0,0.3); color: var(--text);
+  font-size:0.9rem; outline:none;
+}
+.form-group textarea { resize:vertical; min-height:60px; }
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--accent);
+}
+
+.drop-zone {
+  border: 2px dashed rgba(255,255,255,0.2);
+  border-radius: 16px;
+  padding: 40px; text-align:center;
+  cursor: pointer; transition: all 0.2s;
+  color: var(--text-dim);
+}
+.drop-zone:hover, .drop-zone.drag-over {
+  border-color: var(--accent);
+  background: rgba(0,212,212,0.08);
+  color: var(--accent);
+}
+.drop-zone input[type=file] { display:none; }
+
+.preview-list {
+  display:flex; flex-wrap:wrap; gap:8px; margin-top:12px;
+}
+.preview-item {
+  width:70px; height:70px; border-radius:10px;
+  overflow:hidden; background:rgba(0,0,0,0.3);
+  display:flex; align-items:center; justify-content:center;
+}
+.preview-item img { max-width:100%; max-height:100%; object-fit:contain; }
+
+.modal-actions { display:flex; gap:10px; margin-top:18px; justify-content:flex-end; }
+
+/* ---- Toast ---- */
+#toast {
+  position:fixed; bottom:24px; right:24px; z-index:200;
+  padding:14px 24px; border-radius:12px; font-size:0.9rem;
+  font-weight:600; opacity:0; transform:translateY(20px);
+  transition: all 0.3s; pointer-events:none;
+  background: rgba(0,30,50,0.9); backdrop-filter: blur(12px);
+  border: 1px solid rgba(255,255,255,0.1);
+}
+#toast.show { opacity:1; transform:translateY(0); }
+#toast.success { border-color: #00cc88; }
+#toast.error { border-color: #ff4466; }
+
+/* ---- Timer ---- */
+#bg-timer {
+  position:fixed; bottom:16px; left:16px; z-index:50;
+  font-size:0.75rem; color: rgba(255,255,255,0.35);
+  background: rgba(0,0,0,0.25); padding:4px 10px; border-radius: 10px;
+}
+
+/* ---- Responsive ---- */
+@media (max-width: 800px) {
+  #app { flex-direction:column; }
+  #sidebar { width:100%; min-width:unset; flex-direction:row; flex-wrap:wrap; padding:12px; gap:6px; }
+  #sidebar h2 { width:100%; }
+  .cat-item { flex:1; min-width:80px; text-align:center; justify-content:center; padding:8px; font-size:0.8rem; }
+  .cat-count { display:none; }
+  .sidebar-actions { flex-direction:row; width:100%; justify-content:center; }
+  #main { padding:12px; }
+  #header { flex-direction:column; align-items:flex-start; }
+  #search { width:100%; }
+  #grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); gap:8px; }
+  .sticker-img-wrap { height:100px; }
+}
+</style>
+</head>
+<body>
+<div id="app">
+
+<!-- Sidebar -->
+<div id="sidebar">
+  <h2>初音未来表情包管理</h2>
+  <div id="cat-list"></div>
+  <div class="sidebar-actions">
+    <button class="btn btn-accent" onclick="showAddCategory()">+ 新建分类</button>
+    <button class="btn btn-pink" onclick="showUpload()">上传图片</button>
+  </div>
+</div>
+
+<!-- Main -->
+<div id="main">
+  <div id="header">
+    <h1 id="cat-title">全部表情包</h1>
+    <div class="header-actions">
+      <input id="search" placeholder="搜索表情包..." oninput="renderGrid()">
+      <span class="total-badge" id="total-badge"></span>
+    </div>
+  </div>
+
+  <div id="info-panel">
+    <div><strong>情绪：</strong><span id="info-emotion">-</span></div>
+    <div style="flex:1">
+      <strong>触发词：</strong>
+      <div class="trigger-words" id="info-triggers"></div>
+    </div>
+    <div><strong>场景：</strong><span id="info-scenes">-</span></div>
+  </div>
+
+  <div id="grid"></div>
+</div>
+
+</div>
+
+<!-- Upload Modal -->
+<div class="modal-overlay" id="upload-modal">
+  <div class="modal">
+    <h3>上传表情包</h3>
+
+    <div class="form-group">
+      <label>目标来源 / 子目录</label>
+      <select id="upload-source">
+        <option value="01_miratsu">01_miratsu</option>
+        <option value="uploaded">uploaded (通用)</option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label>拖放图片到下方区域，或点击选择</label>
+      <div class="drop-zone" id="drop-zone" onclick="document.getElementById('file-input').click()">
+        点击或拖放 .png .jpg .webp 图片
+        <input type="file" id="file-input" multiple accept="image/png,image/jpeg,image/webp,image/gif,image/bmp" onchange="handleFiles(this.files)">
+      </div>
+    </div>
+
+    <div class="preview-list" id="preview-list"></div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="closeUpload()">取消</button>
+      <button class="btn btn-accent" onclick="doUpload()">确认上传</button>
+    </div>
+  </div>
+</div>
+
+<!-- Add Category Modal -->
+<div class="modal-overlay" id="cat-modal">
+  <div class="modal">
+    <h3 id="cat-modal-title">新建分类</h3>
+
+    <div class="form-group">
+      <label>分类名称</label>
+      <input id="cat-name" placeholder="如：开心、撒娇、傲娇...">
+    </div>
+    <div class="form-group">
+      <label>情绪描述</label>
+      <input id="cat-emotion" placeholder="喜悦、兴奋、庆祝...">
+    </div>
+    <div class="form-group">
+      <label>触发词（英文逗号分隔）</label>
+      <textarea id="cat-triggers" placeholder="哈哈, 好棒, 太好了, 耶"></textarea>
+    </div>
+    <div class="form-group">
+      <label>触发场景（英文逗号分隔）</label>
+      <textarea id="cat-scenes" placeholder="好消息, 达成目标, 收到礼物"></textarea>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn btn-danger" onclick="closeCatModal()">取消</button>
+      <button class="btn btn-accent" id="cat-save-btn" onclick="saveCategory()">保存</button>
+    </div>
+  </div>
+</div>
+
+<div id="toast"></div>
+<div id="bg-timer"></div>
+
+<script>
+// ============================================================
+// State
+// ============================================================
+let catalog = null;
+let currentCategory = null;
+let pendingFiles = [];
+let editingCategory = null;
+
+// Background cycling
+let backgrounds = [];
+let bgIndex = 0;
+let bgInterval = null;
+const BG_CYCLE_SEC = 5 * 60; // 5 minutes
+
+// ============================================================
+// Init
+// ============================================================
+async function init() {
+  const res = await fetch('/api/catalog');
+  catalog = await res.json();
+  backgrounds = catalog._backgrounds || [];
+  delete catalog._all_images;
+
+  renderSidebar();
+  selectCategory(Object.keys(catalog.categories)[0]);
+  startBackgroundCycle();
+}
+
+// ============================================================
+// Background
+// ============================================================
+function startBackgroundCycle() {
+  if (backgrounds.length === 0) {
+    document.getElementById('bg-timer').textContent = '无壁纸';
+    return;
+  }
+  setBg(0);
+  bgInterval = setInterval(() => {
+    bgIndex = (bgIndex + 1) % backgrounds.length;
+    setBg(bgIndex);
+  }, BG_CYCLE_SEC * 1000);
+  updateTimer();
+  setInterval(updateTimer, 1000);
+}
+
+function setBg(i) {
+  document.body.style.setProperty('--bg-url', `url(${backgrounds[i]})`);
+  const el = document.body;
+  el.style.backgroundImage = `url(${backgrounds[i]})`;
+  el.style.backgroundSize = 'cover';
+  el.style.backgroundPosition = 'center';
+  el.style.backgroundAttachment = 'fixed';
+  document.querySelector('body::before')?.style?.setProperty?.(
+    'background-image', `url(${backgrounds[i]})`
+  );
+  // Direct style approach
+  const style = document.createElement('style');
+  style.id = 'bg-style';
+  const old = document.getElementById('bg-style');
+  if (old) old.remove();
+  style.textContent = `body::before { background-image: url(${backgrounds[i]}); }`;
+  document.head.appendChild(style);
+}
+
+function updateTimer() {
+  if (!bgInterval) return;
+  const elapsed = Math.floor((Date.now() - lastBgSwitch) / 1000);
+  const remain = BG_CYCLE_SEC - (elapsed % BG_CYCLE_SEC);
+  const m = Math.floor(remain / 60);
+  const s = remain % 60;
+  document.getElementById('bg-timer').textContent =
+    `壁纸切换: ${m}:${String(s).padStart(2,'0')}  (${backgrounds.length}张)`;
+}
+let lastBgSwitch = Date.now();
+const origSetBg = setBg;
+setBg = function(i) { lastBgSwitch = Date.now(); origSetBg(i); };
+
+// ============================================================
+// Sidebar
+// ============================================================
+function renderSidebar() {
+  const list = document.getElementById('cat-list');
+  const cats = Object.entries(catalog.categories);
+  list.innerHTML = cats.map(([name, cat]) =>
+    `<div class="cat-item${currentCategory === name ? ' active' : ''}" onclick="selectCategory('${name}')">
+      ${name} <span class="cat-count">${cat.stickers.length}</span>
+    </div>`
+  ).join('');
+}
+
+function selectCategory(name) {
+  currentCategory = name;
+  const cat = catalog.categories[name];
+  document.getElementById('cat-title').textContent = name + ' 表情包';
+  document.getElementById('info-emotion').textContent = cat['情绪'] || '-';
+  document.getElementById('info-triggers').innerHTML = (cat['触发词'] || []).map(w => `<span class="trigger-word">${w}</span>`).join('');
+  document.getElementById('info-scenes').textContent = (cat['触发场景'] || []).join('、') || '-';
+  renderSidebar();
+  renderGrid();
+}
+
+// ============================================================
+// Grid
+// ============================================================
+function renderGrid() {
+  const grid = document.getElementById('grid');
+  const search = document.getElementById('search').value.toLowerCase();
+
+  let stickers = [];
+  if (currentCategory && catalog.categories[currentCategory]) {
+    stickers = catalog.categories[currentCategory].stickers;
+  }
+
+  if (search) {
+    stickers = stickers.filter(s => s.toLowerCase().includes(search));
+  }
+
+  document.getElementById('total-badge').textContent = `共 ${stickers.length} 张`;
+
+  if (stickers.length === 0) {
+    grid.innerHTML = '<div class="empty-state">(´；ω；`) 这个分类还没有表情包<br>点击「上传图片」添加吧</div>';
+    return;
+  }
+
+  grid.innerHTML = stickers.map(path => {
+    const name = path.split('/').pop();
+    return `<div class="sticker-card" onclick="previewImage('${path}')">
+      <button class="sticker-delete" onclick="event.stopPropagation(); deleteSticker('${path}')">&times;</button>
+      <div class="sticker-img-wrap"><img src="${path}" loading="lazy" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22><rect fill=%22%23333%22 width=%22100%22 height=%22100%22/><text x=%2250%22 y=%2255%22 text-anchor=%22middle%22 fill=%22%23888%22 font-size=%2212%22>?</text></svg>'"></div>
+      <div class="sticker-name" title="${name}">${name}</div>
+    </div>`;
+  }).join('');
+}
+
+// ============================================================
+// Actions
+// ============================================================
+async function deleteSticker(imgPath) {
+  if (!confirm(`确定删除 "${imgPath.split('/').pop()}" 吗？`)) return;
+
+  // Remove from catalog
+  const cat = catalog.categories[currentCategory];
+  cat.stickers = cat.stickers.filter(s => s !== imgPath);
+
+  // Delete file
+  const res = await fetch('/api/delete', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({path: imgPath})
+  });
+
+  await saveCatalog();
+  renderSidebar();
+  renderGrid();
+  toast('已删除', 'success');
+}
+
+function previewImage(path) {
+  window.open(path, '_blank');
+}
+
+// ============================================================
+// Upload
+// ============================================================
+function showUpload() {
+  document.getElementById('upload-modal').classList.add('show');
+  pendingFiles = [];
+  document.getElementById('preview-list').innerHTML = '';
+  document.getElementById('file-input').value = '';
+}
+
+function closeUpload() {
+  document.getElementById('upload-modal').classList.remove('show');
+  pendingFiles = [];
+}
+
+function handleFiles(files) {
+  for (const f of files) {
+    if (!f.type.startsWith('image/')) continue;
+    pendingFiles.push(f);
+    const reader = new FileReader();
+    reader.onload = e => {
+      const div = document.createElement('div');
+      div.className = 'preview-item';
+      div.innerHTML = `<img src="${e.target.result}">`;
+      document.getElementById('preview-list').appendChild(div);
+    };
+    reader.readAsDataURL(f);
+  }
+}
+
+async function doUpload() {
+  if (pendingFiles.length === 0) {
+    toast('请先选择图片', 'error'); return;
+  }
+
+  const source = document.getElementById('upload-source').value;
+  let uploaded = [];
+
+  for (const file of pendingFiles) {
+    const form = new FormData();
+    form.append('file', file);
+    form.append('source', source);
+
+    const res = await fetch('/api/upload', { method: 'POST', body: form });
+    const data = await res.json();
+    if (data.ok) {
+      uploaded.push(data.path);
+      // Auto-add to current category
+      if (currentCategory) {
+        catalog.categories[currentCategory].stickers.push(data.path);
+      }
+    }
+  }
+
+  await saveCatalog();
+  closeUpload();
+  renderSidebar();
+  renderGrid();
+  toast(`上传 ${uploaded.length} 张成功`, 'success');
+}
+
+// Drag & drop
+const dropZone = document.getElementById('drop-zone');
+dropZone.addEventListener('dragover', e => { e.preventDefault(); dropZone.classList.add('drag-over'); });
+dropZone.addEventListener('dragleave', () => dropZone.classList.remove('drag-over'));
+dropZone.addEventListener('drop', e => {
+  e.preventDefault();
+  dropZone.classList.remove('drag-over');
+  handleFiles(e.dataTransfer.files);
+});
+
+// ============================================================
+// Category Management
+// ============================================================
+function showAddCategory() {
+  editingCategory = null;
+  document.getElementById('cat-modal-title').textContent = '新建分类';
+  document.getElementById('cat-name').value = '';
+  document.getElementById('cat-emotion').value = '';
+  document.getElementById('cat-triggers').value = '';
+  document.getElementById('cat-scenes').value = '';
+  document.getElementById('cat-save-btn').textContent = '创建';
+  document.getElementById('cat-modal').classList.add('show');
+}
+
+function closeCatModal() {
+  document.getElementById('cat-modal').classList.remove('show');
+  editingCategory = null;
+}
+
+async function saveCategory() {
+  const name = document.getElementById('cat-name').value.trim();
+  if (!name) { toast('请输入分类名', 'error'); return; }
+
+  if (editingCategory) {
+    await fetch('/api/update-category', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({
+        name: editingCategory,
+        emotion: document.getElementById('cat-emotion').value.trim(),
+        triggers: document.getElementById('cat-triggers').value.split(/[,，]/),
+        scenes: document.getElementById('cat-scenes').value.split(/[,，]/)
+      })
+    });
+    toast('已更新', 'success');
+  } else {
+    const res = await fetch('/api/add-category', {
+      method: 'POST',
+      headers: {'Content-Type':'application/json'},
+      body: JSON.stringify({ name })
+    });
+    const data = await res.json();
+    if (!data.ok) { toast(data.error || '创建失败', 'error'); return; }
+
+    // Update local
+    catalog.categories[name] = { '情绪': '', '触发词': [], '触发场景': [], 'stickers': [] };
+    selectCategory(name);
+  }
+
+  // Refresh
+  const r = await fetch('/api/catalog');
+  catalog = await r.json();
+  delete catalog._all_images;
+
+  closeCatModal();
+  renderSidebar();
+  renderGrid();
+  toast(editingCategory ? '分类已更新' : '分类已创建', 'success');
+}
+
+async function deleteCategory() {
+  if (!currentCategory) return;
+  if (!confirm(`确定删除分类「${currentCategory}」吗？此操作不可撤销。`)) return;
+
+  const res = await fetch('/api/delete-category', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify({ name: currentCategory })
+  });
+
+  const r = await fetch('/api/catalog');
+  catalog = await r.json();
+  delete catalog._all_images;
+
+  currentCategory = Object.keys(catalog.categories)[0] || null;
+  renderSidebar();
+  renderGrid();
+  toast('分类已删除', 'success');
+}
+
+// Right-click on sidebar category to edit
+document.getElementById('cat-list').addEventListener('contextmenu', async e => {
+  const item = e.target.closest('.cat-item');
+  if (!item) return;
+  e.preventDefault();
+  const name = item.textContent.trim().split(' ')[0];
+  const cat = catalog.categories[name];
+
+  editingCategory = name;
+  document.getElementById('cat-modal-title').textContent = '编辑分类: ' + name;
+  document.getElementById('cat-name').value = name;
+  document.getElementById('cat-emotion').value = cat['情绪'] || '';
+  document.getElementById('cat-triggers').value = (cat['触发词'] || []).join(', ');
+  document.getElementById('cat-scenes').value = (cat['触发场景'] || []).join(', ');
+  document.getElementById('cat-save-btn').textContent = '更新';
+  document.getElementById('cat-modal').classList.add('show');
+});
+
+// ============================================================
+// Save
+// ============================================================
+async function saveCatalog() {
+  const clean = JSON.parse(JSON.stringify(catalog));
+  delete clean._backgrounds;
+  delete clean._all_images;
+  delete clean.pictures_base;
+  delete clean.MEDIA_format;
+  delete clean.sources;
+  await fetch('/api/catalog', {
+    method: 'POST',
+    headers: {'Content-Type':'application/json'},
+    body: JSON.stringify(clean)
+  });
+}
+
+// ============================================================
+// Toast
+// ============================================================
+function toast(msg, type) {
+  const el = document.getElementById('toast');
+  el.textContent = msg;
+  el.className = `show ${type}`;
+  setTimeout(() => el.className = '', 2500);
+}
+
+// ============================================================
+// Keyboard
+// ============================================================
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape') {
+    closeUpload();
+    closeCatModal();
+  }
+});
+
+// ============================================================
+// Start
+// ============================================================
+init();
+</script>
+</body>
+</html>
