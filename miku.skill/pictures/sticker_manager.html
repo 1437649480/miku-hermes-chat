@@ -8,9 +8,9 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --panel: rgba(0,20,40,0.92);
-  --panel-hover: rgba(0,30,60,0.95);
-  --panel-light: rgba(0,40,70,0.85);
+  --panel: rgba(0,15,35,0.75);
+  --panel-hover: rgba(0,25,50,0.82);
+  --panel-light: rgba(0,35,60,0.68);
   --accent: #00d4d4;
   --accent2: #ff66aa;
   --danger: #ff4466;
@@ -287,24 +287,31 @@ body::before {
 /* ---- Timer ---- */
 #bg-timer {
   position:fixed; bottom:16px; left:16px; z-index:50;
-  font-size:0.75rem; color: rgba(255,255,255,0.35);
-  background: rgba(0,0,0,0.5); padding:4px 10px; border-radius: 10px;
-  display:flex; align-items:center; gap:8px;
+  font-size:0.75rem; color: rgba(255,255,255,0.5);
+  background: rgba(0,0,0,0.35); padding:4px 10px; border-radius: 10px;
 }
 
-#bg-btn {
-  background: rgba(0,212,212,0.3);
-  border: 1px solid var(--accent);
+/* ---- Background Switch Button (Bottom Right) ---- */
+#bg-switch {
+  position:fixed; bottom:20px; right:20px; z-index:50;
+  width:48px; height:48px;
+  border-radius:50%;
+  border:2px solid var(--accent);
+  background: rgba(0,20,40,0.6);
   color: var(--accent);
-  padding: 2px 8px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-size: 0.7rem;
-  transition: all 0.2s;
+  cursor:pointer;
+  display:flex; align-items:center; justify-content:center;
+  transition: all 0.3s;
+  font-size:20px;
 }
-#bg-btn:hover {
+#bg-switch:hover {
   background: var(--accent);
   color: #000;
+  transform: rotate(180deg);
+}
+#bg-switch svg {
+  width:24px; height:24px;
+  fill:currentColor;
 }
 
 /* ---- Responsive ---- */
@@ -420,7 +427,10 @@ body::before {
 </div>
 
 <div id="toast"></div>
-<div id="bg-timer"><span id="bg-timer-text"></span><button id="bg-btn" onclick="nextBg()">切换背景</button></div>
+<div id="bg-timer"><span id="bg-timer-text"></span></div>
+<button id="bg-switch" onclick="nextBg()" title="切换背景">
+  <svg viewBox="0 0 24 24"><path d="M12 4V1L8 5l4 4V6c3.31 0 6 2.69 6 6 0 1.01-.25 1.97-.7 2.8l1.46 1.46C19.54 15.03 20 13.57 20 12c0-4.42-3.58-8-8-8zm0 14c-3.31 0-6-2.69-6-6 0-1.01.25-1.97.7-2.8L5.24 7.74C4.46 8.97 4 10.43 4 12c0 4.42 3.58 8 8 8v3l4-4-4-4v3z"/></svg>
+</button>
 
 <script>
 // ============================================================
@@ -457,10 +467,10 @@ async function init() {
 function startBackgroundCycle() {
   if (backgrounds.length === 0) {
     document.getElementById('bg-timer-text').textContent = '无壁纸 (请将图片放入 background/ 目录)';
-    document.getElementById('bg-btn').style.display = 'none';
+    document.getElementById('bg-switch').style.display = 'none';
     return;
   }
-  document.getElementById('bg-btn').style.display = 'inline-block';
+  document.getElementById('bg-switch').style.display = 'flex';
   setBg(0);
   bgInterval = setInterval(() => {
     bgIndex = (bgIndex + 1) % backgrounds.length;
