@@ -330,12 +330,3 @@ Apache 2.0 - 详见 [LICENSE](LICENSE)
 | [みらつ (miratsu)](https://www.pixiv.net/users/102593990) | Q版可爱风原创同人表情包 | 14张 |
 | [分享鲨壁纸网](https://www.fenxiangsha.com/search/255-0.html) | 管理界面背景壁纸来源 | — |
 
-### 🎵 推荐扩展表情包（需手动下载）
-
-| 套系 | 下载方式 | 数量 |
-|------|---------|------|
-| rsktter LINE表情包 | [萌绘网](https://www.moehui.com/255000.html) 提取码 `4pir` | 40张 |
-| 雪未来 LINE表情包 | [萌绘网](https://www.moehui.com/270702.html) 提取码 `j8bg` | 40张 |
-| 兔子洞 LINE表情包 | [萌绘网](https://www.moehui.com/253519.html) 提取码 `8icg` | 24张 |
-| Bib 画师表情包 | [Pixiv](https://www.pixiv.net/users/10899738) / [B站](https://m.bilibili.com/opus/617750888565244450) | — |
-
