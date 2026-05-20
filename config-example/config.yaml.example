@@ -71,3 +71,29 @@ platforms:
 image_gen:
   provider: cf          # 使用 cf 插件
   model: pollinations   # pollinations (免费匿名) 或 flux-schnell (Cloudflare)
+
+# ========== TTS 语音合成 (可选) ==========
+tts:
+  provider: edge                     # 默认方案: Edge TTS (免费)
+  edge:
+    voice: zh-CN-XiaoxiaoNeural     # 微软神经网络中文女声
+
+  # ---- 其他可选 TTS 方案 (择一配置) ----
+  # aivoicelab:                       # 网站反代 - 获取初音未来等角色语音
+  #   modelname: ja-female-hatsune-miku-cover
+  #   modelcat: animation
+  # elevenlabs:                       # 商用高品质 (需 API Key)
+  #   voice_id: pNInz6obpgDQGcFmaJgB
+  #   model: eleven_multilingual_v2
+  # openai:                           # OpenAI TTS (需 API Key)
+  #   model: gpt-4o-mini-tts
+  #   voice: nova
+  # rvc:                              # RVC 本地模型 - 音色转换为 Miku 声线
+  #   model_path: music/rvc/Miku.pth
+  #   index_path: music/rvc/Miku.index
+  #   pipeline: edge → rvc            # 先 Edge TTS 生成，再 RVC 转换音色
+  # neutts:                           # 本地离线 TTS - 无网络可用
+  #   voice: default
+  # kittentts:                        # 轻量本地模型 - 可 fine-tune Miku 声线
+  #   model: KittenML/kitten-tts-nano-0.8-int8
+  #   voice: Jasper
