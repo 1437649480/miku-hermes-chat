@@ -123,9 +123,12 @@ cp gateway/sticker_cache.py $HERMES_HOME/gateway/sticker_cache.py
 
 #### 🖼️ 可视化表情包管理系统
 
-提供 Web 可视化界面管理表情包，支持**上传、删除、分类**操作：
+提供 Web 可视化界面管理表情包，支持**上传、删除、分类**操作。界面采用**玻璃拟态设计**（`backdrop-filter: blur` + 半透明深色面板），确保在缤纷多彩的 Miku 壁纸上文字和按钮依然清晰可读。
+
+**一键启动：** 双击 `miku.skill/pictures/启动表情包管理.bat`（自动安装 Flask 并打开浏览器）
 
 ```bash
+# 或手动启动
 cd miku.skill/pictures
 pip install flask
 python sticker_manager.py
@@ -137,8 +140,8 @@ python sticker_manager.py
 | 查看 | 按分类浏览所有表情包，搜索过滤 |
 | 上传 | 拖放/点击上传 PNG/JPG/WebP，自动归档到对应来源目录 |
 | 删除 | 悬停卡片点击 X 按钮，同时从 catalog 和磁盘删除 |
-| 分类 | 新建/编辑/删除情绪分类，配置触发词和场景 |
-| 壁纸 | 每 5 分钟自动循环 background/ 目录中的壁纸（右键编辑分类） |
+| 分类 | 新建/编辑/删除情绪分类，配置触发词和场景（右键编辑） |
+| 壁纸 | 每 5 分钟自动循环 `background/` 目录中的多张壁纸 |
 
 > 💡 **添加/修改壁纸**：将 .jpg/.png 图片放入 `miku.skill/pictures/background/` 目录即可，系统自动识别并在 5 分钟循环中切换。推荐从 [分享鲨壁纸网 - 初音未来](https://www.fenxiangsha.com/search/255-0.html) 下载高清壁纸。
 
