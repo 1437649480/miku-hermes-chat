@@ -207,10 +207,13 @@ miku-hermes-chat/
 ├── LICENSE                         # Apache 2.0
 ├── miku.skill/                     # 初音未来角色定义
 │   ├── SKILL.md                    #    人格、对话规则、示例
-│   └── pictures/                   #    表情包图片 + sticker_catalog.json
+│   └── pictures/                   #    表情包管理
 │       ├── sticker_catalog.json    #    表情包目录（6种情绪×209张贴纸，触发词+场景匹配）
-│       ├── 01_miratsu/             #    みらつ Q版可爱风 (13张)
-│       └── 06_bilibili_200/        #    B站官方V家表情包 (196张，7个主题)
+│       ├── sticker_manager.py      #    可视化管理系统后端 (Flask)
+│       ├── sticker_manager.html    #    可视化管理系统前端
+│       ├── background/             #    管理界面壁纸（5分钟循环）
+│       ├── 01_miratsu/             #    みらつ Q版可爱风 (14张)
+│       └── 06_bilibili_200/        #    B站官方V家表情包 (150张，7个主题)
 ├── gateway/                        # Hermes 网关扩展
 │   ├── sticker_injector.py         #    情感表情包注入引擎
 │   ├── sticker_cache.py            #    表情包描述缓存
@@ -314,4 +317,22 @@ Apache 2.0 - 详见 [LICENSE](LICENSE)
 - [lzA6](https://github.com/lzA6) - arting-2api 参考
 - [Crypton Future Media](https://www.crypton.co.jp/) - 初音未来角色版权方
 - [KEI](https://x.com/kei_garou) - 初音未来角色原画设计
+- [藤田咲](https://x.com/fujitasaki_pu) - 初音未来音源提供
+
+### 🎨 表情包来源
+
+| 来源 | 说明 | 数量 |
+|------|------|------|
+| [luotianyi-dev/vocaloid-bilibili-stickers](https://github.com/luotianyi-dev/vocaloid-bilibili-stickers) | B站官方V家全套表情包 (CC BY-NC 3.0) | 150张 |
+| [みらつ (miratsu)](https://www.pixiv.net/users/102593990) | Q版可爱风原创同人表情包 | 14张 |
+| [分享鲨壁纸网](https://www.fenxiangsha.com/search/255-0.html) | 管理界面背景壁纸来源 | — |
+
+### 🎵 推荐扩展表情包（需手动下载）
+
+| 套系 | 下载方式 | 数量 |
+|------|---------|------|
+| rsktter LINE表情包 | [萌绘网](https://www.moehui.com/255000.html) 提取码 `4pir` | 40张 |
+| 雪未来 LINE表情包 | [萌绘网](https://www.moehui.com/270702.html) 提取码 `j8bg` | 40张 |
+| 兔子洞 LINE表情包 | [萌绘网](https://www.moehui.com/253519.html) 提取码 `8icg` | 24张 |
+| Bib 画师表情包 | [Pixiv](https://www.pixiv.net/users/10899738) / [B站](https://m.bilibili.com/opus/617750888565244450) | — |
 
