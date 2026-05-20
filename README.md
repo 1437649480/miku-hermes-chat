@@ -123,7 +123,7 @@ cp gateway/sticker_cache.py $HERMES_HOME/gateway/sticker_cache.py
 
 #### 🖼️ 可视化表情包管理系统
 
-提供 Web 可视化界面管理表情包，支持**上传、删除、分类**操作。界面采用**玻璃拟态设计**（`backdrop-filter: blur` + 半透明深色面板），确保在缤纷多彩的 Miku 壁纸上文字和按钮依然清晰可读。
+提供 Web 可视化界面管理表情包，支持**上传、删除、分类**操作。界面采用**深色实体面板**（无玻璃模糊效果），使用您自己放入 `background/` 目录的壁纸作为背景，每 5 分钟自动轮播切换。
 
 **一键启动：** 双击 `miku.skill/pictures/启动表情包管理.bat`（自动安装 Flask 并打开浏览器）
 

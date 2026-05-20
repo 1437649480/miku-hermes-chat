@@ -8,9 +8,9 @@
 * { margin:0; padding:0; box-sizing:border-box; }
 
 :root {
-  --glass: rgba(0,20,40,0.72);
-  --glass-hover: rgba(0,30,60,0.82);
-  --glass-light: rgba(200,230,255,0.12);
+  --panel: rgba(0,20,40,0.92);
+  --panel-hover: rgba(0,30,60,0.95);
+  --panel-light: rgba(0,40,70,0.85);
   --accent: #00d4d4;
   --accent2: #ff66aa;
   --danger: #ff4466;
@@ -43,9 +43,7 @@ body::before {
 /* ---- Sidebar ---- */
 #sidebar {
   width: 260px; min-width: 260px;
-  background: var(--glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--panel);
   border-right: 1px solid rgba(255,255,255,0.08);
   padding: 20px 16px;
   display:flex; flex-direction:column;
@@ -71,11 +69,11 @@ body::before {
   cursor: pointer;
   transition: all 0.2s;
   display:flex; justify-content:space-between; align-items:center;
-  background: var(--glass-light);
+  background: var(--panel-light);
   font-size: 0.95rem;
 }
 .cat-item:hover, .cat-item.active {
-  background: rgba(0, 212, 212, 0.18);
+  background: rgba(0, 212, 212, 0.25);
   border: 1px solid var(--accent);
 }
 .cat-count { font-size:0.8rem; color:var(--text-dim); }
@@ -103,9 +101,7 @@ body::before {
 }
 
 #header {
-  background: var(--glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--panel);
   border-radius: var(--radius);
   padding: 18px 24px;
   display:flex; justify-content:space-between; align-items:center;
@@ -114,21 +110,19 @@ body::before {
 #header h1 { font-size:1.4rem; background:linear-gradient(135deg,var(--accent),var(--accent2)); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
 
 .header-actions { display:flex; gap:10px; align-items:center; }
-#search { padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.3); color:var(--text); font-size:0.9rem; width:200px; outline:none; }
+#search { padding:10px 16px; border-radius:24px; border:1px solid rgba(255,255,255,0.15); background:rgba(0,0,0,0.5); color:var(--text); font-size:0.9rem; width:200px; outline:none; }
 #search::placeholder { color:var(--text-dim); }
 #search:focus { border-color: var(--accent); }
 
 .total-badge {
-  background: var(--glass-light);
+  background: var(--panel-light);
   padding: 6px 14px; border-radius: 20px;
   font-size:0.85rem; color: var(--text-dim);
 }
 
 /* ---- Info Panel ---- */
 #info-panel {
-  background: var(--glass);
-  backdrop-filter: blur(24px);
-  -webkit-backdrop-filter: blur(24px);
+  background: var(--panel);
   border-radius: var(--radius);
   padding: 16px 24px;
   font-size:0.9rem;
@@ -159,9 +153,7 @@ body::before {
 }
 
 .sticker-card {
-  background: var(--glass);
-  backdrop-filter: blur(16px);
-  -webkit-backdrop-filter: blur(16px);
+  background: var(--panel);
   border-radius: var(--radius);
   overflow: hidden;
   position: relative;
@@ -178,7 +170,7 @@ body::before {
 .sticker-img-wrap {
   width:100%; height:140px;
   display:flex; align-items:center; justify-content:center;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
   overflow:hidden;
 }
 .sticker-img-wrap img {
@@ -192,7 +184,7 @@ body::before {
   padding: 8px 10px; font-size:0.75rem;
   color: var(--text-dim); text-align:center;
   white-space: nowrap; overflow:hidden; text-overflow:ellipsis;
-  background: rgba(0,0,0,0.2);
+  background: rgba(0,0,0,0.3);
 }
 
 .sticker-delete {
@@ -218,16 +210,13 @@ body::before {
 /* ---- Modal ---- */
 .modal-overlay {
   position:fixed; inset:0; z-index:100;
-  background: rgba(0,0,0,0.5);
-  backdrop-filter: blur(6px);
+  background: rgba(0,0,0,0.7);
   display:none; align-items:center; justify-content:center;
 }
 .modal-overlay.show { display:flex; }
 
 .modal {
-  background: var(--glass);
-  backdrop-filter: blur(30px);
-  -webkit-backdrop-filter: blur(30px);
+  background: var(--panel);
   border-radius: 20px;
   padding: 32px; max-width: 520px; width: 90%;
   border: 1px solid rgba(255,255,255,0.1);
@@ -248,7 +237,7 @@ body::before {
 .form-group input, .form-group select, .form-group textarea {
   width:100%; padding:10px 14px;
   border-radius: 10px; border:1px solid rgba(255,255,255,0.12);
-  background: rgba(0,0,0,0.3); color: var(--text);
+  background: rgba(0,0,0,0.5); color: var(--text);
   font-size:0.9rem; outline:none;
 }
 .form-group textarea { resize:vertical; min-height:60px; }
@@ -275,7 +264,7 @@ body::before {
 }
 .preview-item {
   width:70px; height:70px; border-radius:10px;
-  overflow:hidden; background:rgba(0,0,0,0.3);
+  overflow:hidden; background:rgba(0,0,0,0.5);
   display:flex; align-items:center; justify-content:center;
 }
 .preview-item img { max-width:100%; max-height:100%; object-fit:contain; }
@@ -288,7 +277,7 @@ body::before {
   padding:14px 24px; border-radius:12px; font-size:0.9rem;
   font-weight:600; opacity:0; transform:translateY(20px);
   transition: all 0.3s; pointer-events:none;
-  background: rgba(0,30,50,0.9); backdrop-filter: blur(12px);
+  background: rgba(0,30,50,0.95);
   border: 1px solid rgba(255,255,255,0.1);
 }
 #toast.show { opacity:1; transform:translateY(0); }
@@ -299,7 +288,7 @@ body::before {
 #bg-timer {
   position:fixed; bottom:16px; left:16px; z-index:50;
   font-size:0.75rem; color: rgba(255,255,255,0.35);
-  background: rgba(0,0,0,0.25); padding:4px 10px; border-radius: 10px;
+  background: rgba(0,0,0,0.5); padding:4px 10px; border-radius: 10px;
 }
 
 /* ---- Responsive ---- */
